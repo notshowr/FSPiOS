@@ -3,8 +3,8 @@ name: Manual IPA JSON Update
 on:
   workflow_dispatch:
     inputs:
-      ipa_file:
-        description: 'Name of the IPA file in /ipas'
+      ipa_url:
+        description: 'Direct download URL of the IPA file'
         required: true
       version:
         description: 'Version of the app (e.g., 9.0.72)'
@@ -28,23 +28,24 @@ jobs:
         with:
           python-version: 3.11
 
-      - name: Update apps.json
+      - name: Update apps.json with IPA size
         run: |
-          import os, json, sys
+          import os, json, requests
 
-          ipa_file = os.environ["INPUT_IPA_FILE"]
+          ipa_url = os.environ["INPUT_IPA_URL"]
           version = os.environ["INPUT_VERSION"]
           description = os.environ["INPUT_DESCRIPTION"]
           release_date = os.environ["INPUT_RELEASE_DATE"]
 
-          ipas_dir = "ipas"
-          ipa_path = os.path.join(ipas_dir, ipa_file)
-          if not os.path.exists(ipa_path):
-              print(f"Error: {ipa_file} not found in /ipas")
-              sys.exit(1)
-
           repo = os.environ['GITHUB_REPOSITORY']
-          base_url = f"https://raw.githubusercontent.com/{repo}/main/{ipas_dir}"
+
+          # Fetch file size from headers
+          try:
+              resp = requests.head(ipa_url, allow_redirects=True)
+              size = int(resp.headers.get('Content-Length', 0))
+          except Exception as e:
+              print(f"Error fetching size: {e}")
+              size = 0
 
           apps_data = {
               "name": "EeveeSpotify",
@@ -58,7 +59,7 @@ jobs:
                       "version": version,
                       "versionDate": release_date,
                       "versionDescription": description,
-                      "downloadURL": f"{base_url}/{ipa_file}",
+                      "downloadURL": ipa_url,
                       "iconURL": f"https://raw.githubusercontent.com/{repo}/main/images/icon.png",
                       "localizedDescription": description,
                       "caption": f"Spotify v{version} injected with EeveeSpotify",
@@ -68,7 +69,7 @@ jobs:
                           f"https://raw.githubusercontent.com/{repo}/main/images/unlimited_skips.jpg",
                           f"https://raw.githubusercontent.com/{repo}/main/images/lyrics.jpg"
                       ],
-                      "size": os.path.getsize(ipa_path)
+                      "size": size
                   }
               ],
               "subtitle": f"Spotify v{version}",
@@ -78,12 +79,12 @@ jobs:
           with open("apps.json", "w") as f:
               json.dump(apps_data, f, indent=2)
 
-          print("apps.json updated successfully")
+          print(f"apps.json updated successfully with IPA size {size} bytes")
 
       - name: Commit and Push
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add apps.json
-          git commit -m "Update apps.json for ${{ github.event.inputs.ipa_file }}" || echo "No changes to commit"
+          git commit -m "Update apps.json for ${{ github.event.inputs.version }}" || echo "No changes to commit"
           git push
