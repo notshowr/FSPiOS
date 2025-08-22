@@ -1,4 +1,4 @@
-name: Manual IPA JSON Update
+lname: Manual IPA JSON Update
 
 on:
   workflow_dispatch:
@@ -31,10 +31,18 @@ jobs:
 
       - name: Update apps.json
         shell: python
+        env:
+          IPA_URL: ${{ github.event.inputs.ipa_url }}
+          VERSION: ${{ github.event.inputs.version }}
+          DESCRIPTION: ${{ github.event.inputs.description }}
+          RELEASE_DATE: ${{ github.event.inputs.release_date }}
         run: |
-          import sys, json
+          import os, json
 
-          ipa_url, version, description, release_date = sys.argv[1:5]
+          ipa_url = os.environ["IPA_URL"]
+          version = os.environ["VERSION"]
+          description = os.environ["DESCRIPTION"]
+          release_date = os.environ["RELEASE_DATE"]
 
           repo = "notshowr/FSPiOS"
           size = 90000000  # Hardcoded 90 MB
@@ -72,8 +80,6 @@ jobs:
               json.dump(apps_data, f, indent=2)
 
           print("apps.json updated successfully")
-        with:
-          args: '${{ github.event.inputs.ipa_url }} ${{ github.event.inputs.version }} "${{ github.event.inputs.description }}" ${{ github.event.inputs.release_date }}'
 
       - name: Commit and Push
         run: |
