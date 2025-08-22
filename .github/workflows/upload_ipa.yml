@@ -19,6 +19,7 @@ on:
 jobs:
   update_json:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -29,6 +30,7 @@ jobs:
           python-version: 3.11
 
       - name: Update apps.json
+        shell: python
         run: |
           import os, json
 
@@ -39,7 +41,7 @@ jobs:
 
           repo = os.environ['GITHUB_REPOSITORY']
 
-          # Hardcoded IPA size: 90 MB
+          # Hardcoded IPA size 90 MB
           size = 90000000
 
           apps_data = {
