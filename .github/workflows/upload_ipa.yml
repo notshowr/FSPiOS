@@ -7,7 +7,7 @@ on:
         description: 'Direct download URL of the IPA file'
         required: true
       version:
-        description: 'Version of the app (e.g., 9.0.xx)'
+        description: 'Version of the app (e.g., 9.0.72)'
         required: true
       description:
         description: 'Update description for apps.json'
@@ -28,8 +28,9 @@ jobs:
         with:
           python-version: 3.11
 
+      - name: Update apps.json
         run: |
-          import os, json, requests
+          import os, json
 
           ipa_url = os.environ["INPUT_IPA_URL"]
           version = os.environ["INPUT_VERSION"]
@@ -38,6 +39,8 @@ jobs:
 
           repo = os.environ['GITHUB_REPOSITORY']
 
+          # Hardcoded IPA size: 90 MB
+          size = 90000000
 
           apps_data = {
               "name": "EeveeSpotify",
@@ -61,7 +64,7 @@ jobs:
                           f"https://raw.githubusercontent.com/{repo}/main/images/unlimited_skips.jpg",
                           f"https://raw.githubusercontent.com/{repo}/main/images/lyrics.jpg"
                       ],
-                      "size": 90000
+                      "size": size
                   }
               ],
               "subtitle": f"Spotify v{version}",
@@ -71,7 +74,7 @@ jobs:
           with open("apps.json", "w") as f:
               json.dump(apps_data, f, indent=2)
 
-          print(f"apps.json updated successfully with IPA size {size} bytes")
+          print("apps.json updated successfully")
 
       - name: Commit and Push
         run: |
