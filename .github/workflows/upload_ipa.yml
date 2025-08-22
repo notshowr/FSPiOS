@@ -1,11 +1,7 @@
 name: Process IPA and Update Source
 
 on:
-  push:
-    paths:
-      - 'incoming/**'
-  workflow_dispatch:  # Optional: allows manual trigger
-
+  workflow_dispatch:  
 jobs:
   process_ipa:
     runs-on: ubuntu-latest
