@@ -1,4 +1,4 @@
-lname: Manual IPA JSON Update
+name: Manual IPA JSON Update
 
 on:
   workflow_dispatch:
