@@ -28,7 +28,6 @@ jobs:
         with:
           python-version: 3.11
 
-      - name: Update apps.json with IPA size
         run: |
           import os, json, requests
 
