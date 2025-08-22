@@ -1,1 +1,110 @@
-TODO: EVERYTHING
+name: Process IPA and Update Source
+
+on:
+  push:
+    paths:
+      - 'incoming/**'
+  workflow_dispatch:  # Optional: allows manual trigger
+
+jobs:
+  process_ipa:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: pip install python-dateutil
+
+      - name: Process new IPA
+        run: |
+          import os, json, re, shutil
+          from datetime import datetime
+          from dateutil.tz import UTC
+
+          INCOMING_DIR = "incoming"
+          IPA_DIR = "ipas"
+          IMAGE_DIR = "images"
+
+          os.makedirs(IPA_DIR, exist_ok=True)
+
+          # Find IPA in incoming
+          ipas = [f for f in os.listdir(INCOMING_DIR) if f.endswith(".ipa")]
+          if not ipas:
+              print("No IPA found in incoming folder.")
+              exit(0)
+
+          ipa_file = ipas[0]
+          print(f"Processing {ipa_file}")
+
+          # Extract version from filename
+          match = re.search(r"EeveeSpotify-(\\d+\\.\\d+\\.\\d+)", ipa_file)
+          version = match.group(1) if match else "unknown"
+
+          # Description file
+          desc_file = os.path.join(INCOMING_DIR, ipa_file.replace(".ipa", ".txt"))
+          description = ""
+          if os.path.exists(desc_file):
+              with open(desc_file, "r") as f:
+                  description = f.read().strip()
+
+          # Move IPA
+          dest_path = os.path.join(IPA_DIR, ipa_file)
+          shutil.move(os.path.join(INCOMING_DIR, ipa_file), dest_path)
+
+          if os.path.exists(desc_file):
+              os.remove(desc_file)
+
+          repo = os.environ['GITHUB_REPOSITORY']
+          base_url = f"https://raw.githubusercontent.com/{repo}/main"
+
+          # Collect all images dynamically
+          screenshots = []
+          if os.path.exists(IMAGE_DIR):
+              for img in os.listdir(IMAGE_DIR):
+                  if img.lower().endswith(('.jpg', '.jpeg', '.png')):
+                      screenshots.append(f"{base_url}/{IMAGE_DIR}/{img}")
+
+          # apps.json structure
+          apps_data = {
+              "name": "EeveeSpotify",
+              "identifier": "com.eevee.source",
+              "author": "whoeevee",
+              "apps": [
+                  {
+                      "name": "EeveeSpotify",
+                      "bundleIdentifier": "com.spotify.client",
+                      "developerName": "EeveeSpotify Team",
+                      "version": version,
+                      "versionDate": datetime.now(UTC).strftime("%Y-%m-%d"),
+                      "versionDescription": description,
+                      "downloadURL": f"{base_url}/{IPA_DIR}/{ipa_file}",
+                      "iconURL": f"{base_url}/{IMAGE_DIR}/icon.png",  # Make sure this file exists
+                      "localizedDescription": description,
+                      "caption": f"Spotify v{version} injected with EeveeSpotify",
+                      "description": f"Spotify v{version} injected with EeveeSpotify",
+                      "screenshotURLs": screenshots,
+                      "size": os.path.getsize(dest_path)
+                  }
+              ],
+              "subtitle": f"Spotify v{version}",
+              "news": []
+          }
+
+          with open("apps.json", "w") as f:
+              json.dump(apps_data, f, indent=2)
+
+          print("apps.json updated successfully")
+
+          # Commit and push
+          os.system("git config user.name 'github-actions'")
+          os.system("git config user.email 'github-actions@github.com'")
+          os.system(f"git add {IPA_DIR}/{ipa_file} apps.json")
+          os.system("git commit -m 'Add IPA {ipa_file} and update apps.json' || echo 'No changes to commit'")
+          os.system("git push")
