@@ -42,7 +42,7 @@ jobs:
           import os, json
 
           ipa_url = os.environ["IPA_URL"]
-          version = int(os.environ["VERSION"])
+          version = os.environ["VERSION"]
           description = os.environ["DESCRIPTION"]
           release_date = os.environ["RELEASE_DATE"]
 
