@@ -7,14 +7,14 @@
       "name": "EeveeSpotify",
       "bundleIdentifier": "com.spotify.client",
       "developerName": "EeveeSpotify Team",
-      "version": "9.072",
+      "version": "9.0.72",
       "versionDate": "2025-08-21",
       "versionDescription": "-Swift v6.1.2 - updated spotify (https://apps.apple.com/app/id324684580) to v9.0.72 \u2014  one of the most popular music streaming services! -  updated: EeveeSpotify (https://github.com/whoeevee/EeveeSpotify) v6.1.2 -  OpenSpotifySafariExtension (https://github.com/BillyCurtis/OpenSpotifySafariExtension) included   \u2022 Updated Simplified Chinese localization by @xiangfeidexiaohuo (https://github.com/xiangfeidexiaohuo)",
       "downloadURL": "https://drive.usercontent.google.com/u/0/uc?id=1aVNrkSigwYsdQMNtlxoKTjCMqahZ1zCG&export=download",
       "iconURL": "https://raw.githubusercontent.com/notshowr/FSPiOS/main/images/icon.png",
       "localizedDescription": "-Swift v6.1.2 - updated spotify (https://apps.apple.com/app/id324684580) to v9.0.72 \u2014  one of the most popular music streaming services! -  updated: EeveeSpotify (https://github.com/whoeevee/EeveeSpotify) v6.1.2 -  OpenSpotifySafariExtension (https://github.com/BillyCurtis/OpenSpotifySafariExtension) included   \u2022 Updated Simplified Chinese localization by @xiangfeidexiaohuo (https://github.com/xiangfeidexiaohuo)",
-      "caption": "Spotify v9.072 injected with EeveeSpotify",
-      "description": "Spotify v9.072 injected with EeveeSpotify",
+      "caption": "Spotify v9.0.72 injected with EeveeSpotify",
+      "description": "Spotify v9.0.72 injected with EeveeSpotify",
       "screenshotURLs": [
         "https://raw.githubusercontent.com/notshowr/FSPiOS/main/images/Edited_1.jpg",
         "https://raw.githubusercontent.com/notshowr/FSPiOS/main/images/unlimited_skips.jpg",
@@ -23,6 +23,6 @@
       "size": 90000000
     }
   ],
-  "subtitle": "Spotify v9.072",
+  "subtitle": "Spotify v9.0.72",
   "news": []
 }
