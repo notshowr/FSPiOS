@@ -7,14 +7,14 @@
       "name": "EeveeSpotify",
       "bundleIdentifier": "com.spotify.client",
       "developerName": "EeveeSpotify Team",
-      "version": "9.0.7.4",
+      "version": "9.0.74",
       "versionDate": "2025-08-28",
       "versionDescription": "Swift 6.13 + Localization updates for Polish, Japanese, and German.",
-      "downloadURL": "https://www.dropbox.com/pri/get/EeveeSpotify-9.0.74.ipa?_download_id=630131919915821618206122489396135462288830988753722377835030697&_log_download_success=1&_notify_domain=www.dropbox.com&_subject_uid=2406387969&w=AADNf5mDU9XkvgX2KC-HQZcFVclnKO-1zbcg2Pd9zSjndw",
+      "downloadURL": "https://www.dropbox.com/scl/fi/2sm1czl58l8d058fj60es/EeveeSpotify-9.0.74.ipa?rlkey=o0d5xngrrvif5e94q1li66i5y&e=1&st=uwjndso5&dl=1",
       "iconURL": "https://raw.githubusercontent.com/notshowr/FSPiOS/main/images/icon.png",
       "localizedDescription": "Swift 6.13 + Localization updates for Polish, Japanese, and German.",
-      "caption": "Spotify v9.0.7.4 injected with EeveeSpotify",
-      "description": "Spotify v9.0.7.4 injected with EeveeSpotify",
+      "caption": "Spotify v9.0.74 injected with EeveeSpotify",
+      "description": "Spotify v9.0.74 injected with EeveeSpotify",
       "screenshotURLs": [
         "https://raw.githubusercontent.com/notshowr/FSPiOS/main/images/Edited_1.jpg",
         "https://raw.githubusercontent.com/notshowr/FSPiOS/main/images/unlimited_skips.jpg",
@@ -23,6 +23,6 @@
       "size": 90000000
     }
   ],
-  "subtitle": "Spotify v9.0.7.4",
+  "subtitle": "Spotify v9.0.74",
   "news": []
 }
