@@ -1,1 +1,1 @@
-[AltStore/Feather Source]((https://github.com/notshowr/FSPiOS/raw/refs/heads/main/apps.json))
+[AltStore/Feather Source]([url](https://github.com/notshowr/FSPiOS/raw/refs/heads/main/apps.json))
