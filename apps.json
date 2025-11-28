@@ -7,14 +7,14 @@
       "name": "EeveeSpotify",
       "bundleIdentifier": "com.spotify.client",
       "developerName": "EeveeSpotify Team",
-      "version": "9.0.91",
-      "versionDate": "2025-11-02",
-      "versionDescription": "Swift 6.2 + Localization updates for Italian, New architecture + lyrics",
-      "downloadURL": "https://www.dropbox.com/scl/fi/xjftc1gith66mhb1jrrxx/EeveeSpotify-9.0.91.ipa?rlkey=7de5zf4mitk4relhzrx4b970y&st=hr0j7241&dl=1",
+      "version": "9.1.0",
+      "versionDate": "2025-11-27",
+      "versionDescription": "Swift 6.22",
+      "downloadURL": "https://www.dropbox.com/scl/fi/j6uspeo0me4maf7x67a2y/EeveeSpotify-9.1.0.ipa?rlkey=swkf3rbnccs6d69er2vm9y0c4&st=fpmk7byr&dl=1",
       "iconURL": "https://raw.githubusercontent.com/notshowr/FSPiOS/main/images/icon.png",
-      "localizedDescription": "Swift 6.2 + Localization updates for Italian, New architecture + lyrics",
-      "caption": "Spotify v9.0.91 injected with EeveeSpotify",
-      "description": "Spotify v9.0.91 injected with EeveeSpotify",
+      "localizedDescription": "Swift 6.22",
+      "caption": "Spotify v9.1.0 injected with EeveeSpotify",
+      "description": "Spotify v9.1.0 injected with EeveeSpotify",
       "screenshotURLs": [
         "https://raw.githubusercontent.com/notshowr/FSPiOS/main/images/Edited_1.jpg",
         "https://raw.githubusercontent.com/notshowr/FSPiOS/main/images/unlimited_skips.jpg",
@@ -23,6 +23,6 @@
       "size": 90000000
     }
   ],
-  "subtitle": "Spotify v9.0.91",
+  "subtitle": "Spotify v9.1.0",
   "news": []
 }
